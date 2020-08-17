@@ -1,6 +1,6 @@
 import React from 'react';
-import Aux from './../../../hoc/Auxiliary';
 import Button from './../../UI/Button/Button';
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
 const orderSummary = props => {
   const ingredientsList = Object.keys(props.ingredients).map(key => {
