@@ -4,6 +4,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from './../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from './../../components/Burger/OrderSummary/OrderSummary';
+import axios from 'axios';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -80,7 +81,24 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    alert('Continue!');
+    const ingredients = Object.keys(this.state.ingredients).map(key => {
+      return {
+        name: key,
+        amount: this.state.ingredients[key]
+      };
+    });
+
+    const payload = {
+      name: `Marcelo ${Math.round(Math.random() * 1000)}`, // Should be replaced by the name f the user when thid field is avalilable
+      ingredients
+    }
+
+    axios.post('http://localhost:3000/burgers', payload)
+      .then(() => alert('SUCCESS!'))
+      .catch(response => {
+        alert('FAILED');
+        console.log(response)
+      })
   };
 
   render() {
